@@ -36,3 +36,10 @@ cartItems.reduce(
     accumalatedQuantity + cartItem.quantity,
   0
 )
+
+export const selectPriceTotal = cartItems => 
+  cartItems.reduce(
+    (accumulatedValue,cartItem) =>
+      accumulatedValue + cartItem.quantity * cartItem.price,
+      0
+  )

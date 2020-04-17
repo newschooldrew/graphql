@@ -1,4 +1,5 @@
-import {addItemToCart, getCartItemCount} from './cart.utils'
+import {addItemToCart, getCartItemCount,selectPriceTotal} from './cart.utils'
+import {GET_CART_HIDDEN, GET_CART_ITEMS, GET_ITEM_COUNT,GET_TOTAL_PRICE} from '../queries/cart/cart.queries'
 import {gql} from 'apollo-boost';
 
 export const typeDefs = gql`
@@ -10,19 +11,6 @@ export const typeDefs = gql`
         AddItemToCart(item:Item!):[Item]!
     }
 `;
-const GET_CART_HIDDEN = gql`
-    {
-        cartHidden @client
-    }
-`;
-
-const GET_CART_ITEMS = gql`{
-    cartItems @client
-}`;
-
-const GET_ITEM_COUNT = gql`{
-    itemCount @client
-}`;
 
 export const resolvers = {
     Mutation:{
@@ -52,7 +40,10 @@ export const resolvers = {
                 query:GET_ITEM_COUNT,
                 data: {itemCount:getCartItemCount(newCartItems)}
             })
-
+            cache.writeQuery({
+                query:GET_TOTAL_PRICE,
+                data:{totalPrice:selectPriceTotal(newCartItems)}
+            })
             return newCartItems;
         }
     }

@@ -29,3 +29,10 @@ export const removeItemFromCart = (cartItems, cartItemToRemove) => {
       : cartItem
   );
 };
+
+export const selectPriceTotal = cartItems => {
+  cartItems.reduce(
+    (accumulatedValue,cartItem) => accumulatedValue + cartItem.quantity * cartItem.price
+    ,0
+    )
+}

@@ -22,7 +22,7 @@ const GET_ITEM_COUNT = gql`
                     ({data}) =>{
                     const {itemCount} = data;
                     return <CartIcon toggleCartHidden={toggleCartHidden} itemCount={itemCount}/>
-                }
+                        }
                     }
             </Query>
                 )
