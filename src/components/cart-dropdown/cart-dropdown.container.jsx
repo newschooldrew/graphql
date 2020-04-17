@@ -18,10 +18,9 @@ const CartDropdownContainer = () => (
         toggleCartHidden => (
             <Query query={GET_CART_ITEMS}>
                 {
-                ({data})=> {
-                    const {cartItems} = data;
-                    return <CartDropdown cartItems={cartItems} toggleCartHidden={toggleCartHidden} />
-                }
+                ({data:{cartItems}})=> (
+                    <CartDropdown cartItems={cartItems} toggleCartHidden={toggleCartHidden} />
+                )
             }
             </Query>
         )

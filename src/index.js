@@ -8,7 +8,7 @@ import {createHttpLink} from 'apollo-link-http'
 // connects client to our /graphql endpoint
 import {InMemoryCache} from 'apollo-cache-inmemory'
 // to not make double requests
-import {ApolloClient, gql} from 'apollo-boost'
+import {ApolloClient} from 'apollo-boost'
 import { store, persistor } from './redux/store';
 
 import './index.css';
@@ -32,23 +32,11 @@ const client = new ApolloClient({
 client.writeData({
   data:{
     cartHidden:true,
-    cartItems:[]
+    cartItems:[],
+    itemCount:0,
+    totalPrice:0
   }
 })
-
-client.query({
-  query:gql`
-      {
-        getCollectionsByTitle(title:"hats"){
-    id
-    title
-    items{
-      price
-    }
-  }
-      }
-    `
-}).then(res => console.log(res))
 
 ReactDOM.render(
 <ApolloProvider client={client}>
