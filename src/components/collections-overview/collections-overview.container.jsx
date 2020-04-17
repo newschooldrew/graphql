@@ -18,7 +18,7 @@ const GET_COLLECTIONS  = gql`
             }
         }
     }
-`;
+`
 const CollectionsOverviewContainer = () => (
     <Query query={GET_COLLECTIONS}>
         {
